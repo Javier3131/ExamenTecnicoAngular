@@ -1,0 +1,26 @@
+<p>
+  card works!
+</p>
+
+<button mat-flat-button (click)="getPhotos()">Consulta API Photos</button>
+
+
+<!-- <div *ngFor="let item of photosArray">
+  <mat-card>
+    <mat-card-title>
+      {{item.title}}
+    </mat-card-title>
+    <img src="{{item.url}}">
+  </mat-card>
+</div> -->
+
+
+<mat-card *ngFor="let item of observableData | async">
+  <mat-card-title>
+    {{item.title}}
+  </mat-card-title>
+  <img src="{{item.url}}">
+</mat-card>
+
+<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

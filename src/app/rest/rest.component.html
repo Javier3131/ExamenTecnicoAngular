@@ -1,0 +1,49 @@
+
+<mat-list *ngFor="let c of categoria">
+  <mat-list-item>
+    <button mat-flat-button (click)='categoriaPresionada(c.codigo)'>{{c.nombre}} </button>
+  </mat-list-item>
+</mat-list>
+
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef="codigo_str">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.codigo_str}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="precio">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <p> L. {{row.precio | number:'2.2'}} </p>
+
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="urlFoto">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </mat-header-cell>
+    <mat-cell style="size: 225px; max-width: 225px; max-height: 225px;" *matCellDef="let row">
+      <img src="{{row.urlFoto}}">
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;">
+
+  </mat-row>
+
+</mat-table>
+
+<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
